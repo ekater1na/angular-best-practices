@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 
-import { UserRepositoryService } from "./services/user-repository.service";
+import { UserRepositoryService } from "./user-repository.service";
 
 @Component({
   selector: 'nav-bar',
   styleUrls: [`./nav-bar.component.css`],
   template: `
     <div class="nav-bar">
-      <img class="logo" src="../assets/images/whitebeard-logo.png" alt="Whitebeard Logo" />
+      <img class="logo" src="../../assets/images/whitebeard-logo.png" alt="Whitebeard Logo"/>
       <div class="nav-item"><a [routerLink]="['/catalog']">Catalog</a></div>
       <account-menu [user]="currentUser" (signedOut)="handleSignOut()"></account-menu>
     </div>
-`
+  `
 })
 
 export class NavBarComponent  {
