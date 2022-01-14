@@ -37,14 +37,18 @@ export class RegisterComponent {
 
   registerUser(user: IUser) {
     this.saving = true;
+    this.saveAndRedirect(user);
+  }
+
+  cancel() {
+    this.router.navigate(['/']);
+  }
+
+  private saveAndRedirect(user: IUser){
     this.dataRepository.saveUser(user)
       .subscribe(
         null,
         () => this.saving = false,
         () => this.router.navigate(['/catalog']));
-  }
-
-  cancel() {
-    this.router.navigate(['/']);
   }
 }
