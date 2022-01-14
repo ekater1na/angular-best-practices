@@ -59,6 +59,6 @@ export class CatalogComponent implements OnInit {
   }
 
   applyFilter(filter: string) {
-    this.visibleClasses = this.filterClassesSercice.filterClasses(filter, this.classes)
+    this.visibleClasses = this.filterClassesSercice.filterClasses(filter, this.classes);
   }
 }

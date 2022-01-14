@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { UserRepositoryService } from '../core/user-repository.service';
 
 @Injectable()
 export class CatalogRepositoryService {
   currentUser:any;
 
-  constructor() {}
+  constructor(private userRepository: UserRepositoryService) {}
 
   getCatalog():Observable<any[]> {
     const subject = new Subject<any>();
-    const currentUser = this.currentUser || {classes:[]};
+    const currentUser = this.userRepository.currentUser || {classes:[]};
     const catalogWithEnrollmentStatus =
       courseCatalog.map(catalogClass => {
         let enrolled = {enrolled: currentUser.classes.includes(catalogClass.classId)};
