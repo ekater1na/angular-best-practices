@@ -4,6 +4,7 @@ import {SharedModule} from "../shared/shared.module";
 import {CoreModule} from "../core/core.module";
 import {CatalogRepositoryService} from "./catalog-repository.service";
 import {RouterModule} from "@angular/router";
+import { FilterClassesService } from './filter-classes.service';
 
 
 
@@ -15,6 +16,6 @@ import {RouterModule} from "@angular/router";
     CoreModule,
     RouterModule
   ],
-  providers: [CatalogRepositoryService]
+  providers: [CatalogRepositoryService, FilterClassesService]
 })
 export class CatalogModule { }
