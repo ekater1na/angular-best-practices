@@ -6,31 +6,38 @@
   <button (click)="applyFilter('')">All</button>
 </div>
 <div>
+  <button (click)="mutateFirstProfessor()" class="pipe">Mutate First Professor</button>
+  <button (click)="updateFirstProfessor()" class="pipe">Immutably Update First Professor</button>
   <table>
     <thead>
-      <th>Course #</th>
-      <th>Course Name</th>
-      <th>Professor</th>
-      <th>Days</th>
-      <th>Time</th>
-      <th class="center">Credits</th>
-      <th class="center">Enroll/Drop</th>
+    <th>Course #</th>
+    <th>Course Name</th>
+    <th (click)="orderByField = 'professor'">Professor</th>
+    <th>Days</th>
+    <th>Time</th>
+    <th class="center">Credits</th>
+    <th class="center">Enroll/Drop</th>
     </thead>
     <tbody>
-      <tr *ngFor="let class of visibleClasses">
-        <td><a [routerLink]="['/catalog/' + class.course.courseNumber]">{{class.course.courseNumber}}</a></td>
-        <td><a [routerLink]="['/catalog/' + class.course.courseNumber]">{{class.course.courseName}}</a></td>
-        <td>{{class.professor}}</td>
-        <td>{{class.days}}</td>
-        <td>{{class.time}}</td>
-        <td class="center">{{class.course.creditHours}}</td>
-        <td class="enroll center">
-          <button class="sign-in" *ngIf="!userRepository.currentUser" disabled>Sign In to Enroll</button>
-          <button *ngIf="userRepository.currentUser && !class.enrolled && !class.processing" (click)="enroll(class)">Enroll</button>
-          <button *ngIf="userRepository.currentUser && class.enrolled && !class.processing" (click)="drop(class)">Drop</button>
-          <wb-loading-spinner [loading]="class.processing"></wb-loading-spinner>
-        </td>
-      </tr>
+    <tr *ngFor="let classItem of visibleClasses | orderBy: orderByField">
+      <td><a [routerLink]="['/catalog/' + classItem.course.courseNumber]">{{classItem.course.courseNumber}}</a></td>
+      <td><a [routerLink]="['/catalog/' + classItem.course.courseNumber]">{{classItem.course.courseName}}</a></td>
+      <td>{{classItem.professor}}</td>
+      <td>{{classItem.days}}</td>
+      <td>{{classItem.time}}</td>
+      <td class="center">{{classItem.course.creditHours}}</td>
+      <td class="enroll center">
+        <button *ngIf="!userRepository.currentUser" class="sign-in" disabled>Sign In to Enroll</button>
+        <button (click)="enroll(classItem)"
+                *ngIf="userRepository.currentUser && !classItem.enrolled && !classItem.processing">
+          Enroll
+        </button>
+        <button (click)="drop(classItem)"
+                *ngIf="userRepository.currentUser && classItem.enrolled && !classItem.processing">Drop
+        </button>
+        <wb-loading-spinner [loading]="classItem.processing"></wb-loading-spinner>
+      </td>
+    </tr>
     </tbody>
   </table>
 </div>

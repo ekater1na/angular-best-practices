@@ -27,12 +27,22 @@ th {
 tr:nth-child(even) {
   background-color: #CCDDFF;
 }
+
 .center {
-  text-align:center;
+  text-align: center;
 }
+
 .enroll {
   background-color: white;
 }
+
 button {
-  font-size:18px;
+  font-size: 18px;
+}
+
+.pipe {
+  background-color: #999999;
+  color: white;
+  margin: 5px 10px;
+  font-size: 14px;
 }
