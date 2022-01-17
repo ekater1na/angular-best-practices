@@ -14,8 +14,8 @@ import {SignInComponent} from './sign-in.component';
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forChild([
-      {path: 'users/register', component: RegisterComponent,},
-      {path: 'users/sign-in', component: SignInComponent,}
+      {path: 'register', component: RegisterComponent,},
+      {path: 'sign-in', component: SignInComponent,}
     ]),
     SharedModule
   ]
