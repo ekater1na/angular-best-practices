@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Observable, EMPTY, throwError} from 'rxjs';
+import {EMPTY, Observable, throwError} from 'rxjs';
 import {delay} from 'rxjs/operators';
 import {IUser} from "../users/user.model";
+import * as _ from 'lodash';
 
 @Injectable()
 export class UserRepositoryService {
@@ -36,7 +37,10 @@ export class UserRepositoryService {
     if (!this.currentUser.classes.includes(classId))
       return throwError(() => new Error('Not enrolled'));
 
-    this.currentUser = {...this.currentUser, classes: this.currentUser.classes.filter((c: string) => c !== classId)};
+    this.currentUser = {
+      ...this.currentUser,
+      classes: _.filter(this.currentUser.classes.filter((c: string) => c !== classId))
+    };
     console.log(this.currentUser)
     return EMPTY.pipe(delay(3000));
   }
@@ -59,7 +63,7 @@ export class UserRepositoryService {
   }
 }
 
-const users = [{
+export const users = [{
   userId: 'e61aebed-dbc5-437a-b514-02b8380d8efc',
   firstName: 'Jim',
   lastName: 'Cooper',
